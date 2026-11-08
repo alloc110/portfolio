@@ -1,10 +1,10 @@
-# 🚀 Nguyễn Hùng Thiện Lộc — Data & AI Engineering Portfolio
+# 🚀 Nguyễn Hùng Thiên Lộc — Data & AI Engineering Portfolio
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Portfolio-blue?style=for-the-badge&logo=githubpages&logoColor=white)](https://alloc110.github.io/portfolio/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nguyen_Hung_Thien_Loc-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/nguyenhtloc110)
 [![GitHub](https://img.shields.io/badge/GitHub-alloc110-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alloc110)
 
-Trang Portfolio cá nhân của **Nguyễn Hùng Thiện Lộc** — Kỹ sư Dữ liệu (Data Engineer) chuyên sâu về **Data Warehouse (PostgreSQL, dbt)**, **Real-Time Streaming Systems (Golang, Kafka, Flink, Redis)** và **AI Agents / Text-to-SQL**.
+Trang Portfolio cá nhân của **Nguyễn Hùng Thiên Lộc** — Kỹ sư Dữ liệu (Data Engineer) chuyên sâu về **Data Warehouse (PostgreSQL, dbt)**, **Real-Time Streaming Systems (Golang, Kafka, Flink, Redis)** và **AI Agents / Text-to-SQL**.
 
 ---
 
