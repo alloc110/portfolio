@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyễn Hùng Thiện Lộc — Data Engineer & AI Platform Specialist</title>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta name="description" content="Portfolio chuyên sâu về Data Engineering, Real-Time Streaming, Data Warehouse và Hệ thống AI - Nguyễn Hùng Thiện Lộc (alloc110).">
+  <meta property="og:title" content="Nguyễn Hùng Thiện Lộc — Data & AI Engineer Portfolio">
+  <meta property="og:description" content="Data Warehouse (PostgreSQL, dbt), Real-time Streaming (Go, Kafka, Flink), AI Agents (Text-to-SQL, LLMs) & Full-stack Data Platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alloc110.github.io/portfolio/">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(13, 17, 23, 0.82);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.18);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      --accent-de: #06b6d4;  /* Cyan for Data Engineering & Kafka */
+      --accent-ai: #a855f7;  /* Purple for AI / LLMs / XGBoost */
+      --accent-da: #f59e0b;  /* Amber for Analytics, BI & DWH */
+      --accent-green: #10b981; /* Emerald for Performance & Metrics */
+      --font-display: 'Syne', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Newsreader', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Lighting */
+    .ambient-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    .glow-1 { top: -100px; left: -100px; background: #0284c7; }
+    .glow-2 { top: 40%; right: -150px; background: #7c3aed; }
+    .glow-3 { bottom: -100px; left: 30%; background: #059669; }
+
+    .portfolio-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 36px 24px 80px 24px;
+    }
+
+    /* ==========================================================================
+       2. HEADER NAVIGATION
+       ========================================================================== */
+    header.deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #06b6d4, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+    }
+
+    .brand-text h2 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .brand-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .deck-nav-links {
+      display: flex;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      padding: 4px;
+      backdrop-filter: blur(14px);
+    }
+
+    .deck-nav-btn {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .deck-nav-btn:hover, .deck-nav-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .deck-nav-btn.btn-cv {
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      color: #fff;
+      font-weight: 700;
+    }
+    .deck-nav-btn.btn-cv:hover {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    }
+
+    /* ==========================================================================
+       3. HERO SLIDE (16:9 EDITORIAL CINEMATIC)
+       ========================================================================== */
+    .hero-slide {
+      position: relative;
+      width: 100%;
+      min-height: 560px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #0b0f17;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px 54px;
+      margin-bottom: 48px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+    }
+
+    .hero-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.32;
+      filter: contrast(1.15) brightness(0.85);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.2) 0%, rgba(7, 9, 14, 0.85) 60%, #07090e 100%),
+                  radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.2) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(6, 182, 212, 0.14);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #67e8f9;
+      font-size: 11.5px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero-main-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+    .hero-main-title .outline-txt {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+    }
+    .hero-main-title .gradient-txt {
+      background: linear-gradient(135deg, #38bdf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-quote-box {
+      border-left: 2px solid #06b6d4;
+      padding-left: 20px;
+      margin-bottom: 32px;
+      max-width: 760px;
+    }
+    .hero-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(17px, 2.2vw, 21px);
+      font-style: italic;
+      color: #e2e8f0;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .hero-author {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 13px 28px;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #07090e;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.25);
+    }
+    .btn-primary:hover {
+      background: #38bdf8;
+      color: #07090e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 13px 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: #f8fafc;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       4. PROFILE & PERSONAL SUMMARY
+       ========================================================================== */
+    .profile-slide {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, #0d1322 0%, #07090e 100%);
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .profile-photo-col {
+      position: relative;
+      min-height: 480px;
+      background: #090d16;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-headshot {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: contrast(1.05) brightness(0.95);
+      transition: transform 0.6s ease;
+    }
+    .profile-slide:hover .profile-headshot { transform: scale(1.02); }
+
+    .photo-shadow-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 75%, #07090e 100%),
+                  linear-gradient(0deg, rgba(7, 9, 14, 0.85) 0%, transparent 45%);
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 12px 18px;
+      backdrop-filter: blur(12px);
+      z-index: 5;
+    }
+    .photo-badge-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #fff; }
+    .photo-badge-sub { font-size: 11.5px; color: #38bdf8; font-family: var(--font-mono); }
+
+    .profile-info-col {
+      padding: 48px 46px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+
+    .profile-name {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .profile-role {
+      font-size: 15px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-role span.dot { color: #38bdf8; }
+
+    .profile-bio {
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .profile-contact-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+    .p-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .p-chip:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+
+    .profile-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      padding-top: 22px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .p-stat h4 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .p-stat p {
+      font-size: 10.5px;
+      color: var(--text-faint);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       5. WORK EXPERIENCE TIMELINE (KINH NGHIỆM THỰC CHIẾN)
+       ========================================================================== */
+    .experience-section {
+      margin-bottom: 48px;
+    }
+
+    .section-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .headline-text h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .headline-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .exp-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .exp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .exp-card:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .exp-company {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .exp-role {
+      font-size: 13.5px;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      color: #94a3b8;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .exp-bullets li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .exp-bullets li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #06b6d4;
+      font-size: 14px;
+    }
+
+    .exp-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* ==========================================================================
+       6. KEY ACHIEVEMENTS & OLYMPIAD AWARDS
+       ========================================================================== */
+    .achievements-section {
+      margin-bottom: 48px;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .achieve-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 26px 22px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .achieve-card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+    }
+    .achieve-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06b6d4, #a855f7);
+      opacity: 0.8;
+    }
+
+    .achieve-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+    .achieve-metric {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .achieve-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .achieve-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       7. TECHNICAL SKILLS MATRIX
+       ========================================================================== */
+    .skills-section {
+      margin-bottom: 48px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .skill-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .skill-box-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .s-tag {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: #e2e8f0;
+    }
+    .s-tag.highlight {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: rgba(6, 182, 212, 0.4);
+      color: #67e8f9;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       8. FEATURED REPOSITORIES (3 REPOS: FRAUD, CLAWSENSE, FINDMYBOSS)
+       ========================================================================== */
+    .projects-section {
+      margin-bottom: 60px;
+    }
+
+    .projects-filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #07090e;
+    }
+
+    .flagship-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .flagship-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      backdrop-filter: blur(14px);
+      transition: all 0.3s ease;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+    .flagship-card:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    }
+
+    .flagship-visual {
+      position: relative;
+      background: #090d16;
+      min-height: 320px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
+    .flagship-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      filter: contrast(1.2) brightness(0.8);
+      transition: transform 0.6s ease;
+    }
+    .flagship-card:hover .flagship-bg-img {
+      transform: scale(1.05);
+    }
+    .flagship-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.3) 0%, rgba(7, 9, 14, 0.95) 100%);
+    }
+
+    .flagship-badge-row {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .flagship-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      backdrop-filter: blur(8px);
+      text-transform: uppercase;
+    }
+    .badge-fraud { background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; }
+    .badge-claw { background: rgba(168, 85, 247, 0.2); border: 1px solid #a855f7; color: #d8b4fe; }
+    .badge-find { background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; color: #67e8f9; }
+
+    .flagship-stat-callout {
+      position: relative;
+      z-index: 5;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 16px;
+      backdrop-filter: blur(10px);
+    }
+    .callout-num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1;
+    }
+    .callout-label {
+      font-size: 11px;
+      color: #cbd5e1;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    .flagship-details {
+      padding: 34px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .flagship-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .flagship-sub {
+      font-size: 13.5px;
+      color: #38bdf8;
+      font-family: var(--font-mono);
+      margin-bottom: 16px;
+    }
+    .flagship-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .flagship-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .flagship-highlights div {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .flagship-highlights span.bullet {
+      color: #06b6d4;
+      font-weight: 800;
+    }
+
+    .flagship-tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .p-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: #e2e8f0;
+    }
+
+    .flagship-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .link-btn {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      transition: all 0.2s ease;
+    }
+    .link-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      transform: translateY(-1px);
+    }
+    .link-btn.primary-btn {
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      border-color: transparent;
+      color: #fff;
+      font-weight: 700;
+    }
+    .link-btn.primary-btn:hover {
+      box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       9. PHILOSOPHY QUOTE BANNER
+       ========================================================================== */
+    .quote-banner {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 32px;
+      margin-bottom: 56px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    }
+    .quote-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+      filter: contrast(1.2) brightness(0.8);
+    }
+    .quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(7, 9, 14, 0.85) 0%, rgba(7, 9, 14, 0.98) 100%);
+    }
+    .quote-content { position: relative; z-index: 10; max-width: 820px; }
+    .quote-icon { font-size: 30px; color: #38bdf8; margin-bottom: 12px; display: inline-block; }
+    .quote-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(19px, 2.8vw, 25px);
+      color: #f1f5f9;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .quote-caption { font-family: var(--font-mono); font-size: 12px; color: #38bdf8; letter-spacing: 0.08em; }
+
+    /* ==========================================================================
+       10. CONTACT & THANK YOU SECTION
+       ========================================================================== */
+    .contact-slide {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, #0d1322 0%, #07090e 100%);
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    }
+    .contact-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .contact-left p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .contact-grid { display: flex; flex-direction: column; gap: 12px; }
+    .contact-tile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    .contact-tile:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #38bdf8;
+      transform: translateX(4px);
+    }
+    .tile-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+    .tile-info div:first-child { font-size: 11.5px; color: var(--text-faint); font-family: var(--font-mono); }
+    .tile-info div:last-child { font-size: 14px; font-weight: 600; color: #fff; }
+
+    /* Footer Copyright */
+    footer.portfolio-footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 960px) {
+      .profile-slide, .exp-cards-grid, .flagship-card, .contact-slide, .achievements-grid, .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-slide {
+        padding: 40px 24px;
+      }
+      .profile-info-col {
+        padding: 36px 24px;
+      }
+      .deck-nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Decorative Background Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <div class="portfolio-wrapper">
+
+    <!-- 1. HEADER & TOP NAVIGATION -->
+    <header class="deck-header">
+      <a href="#" class="brand-mark">
+        <div class="brand-logo-badge">TL</div>
+        <div class="brand-text">
+          <h2>NGUYỄN HÙNG THIỆN LỘC</h2>
+          <p>DATA ENGINEER // DATA WAREHOUSE & AI PLATFORMS</p>
+        </div>
+      </a>
+
+      <nav class="deck-nav-links">
+        <a href="#profile-section" class="deck-nav-btn">HỒ SƠ</a>
+        <a href="#experience-section" class="deck-nav-btn">KINH NGHIỆM</a>
+        <a href="#achievements-section" class="deck-nav-btn">THÀNH TỰU</a>
+        <a href="#projects-section" class="deck-nav-btn">3 DỰ ÁN REPO</a>
+        <a href="#contact-section" class="deck-nav-btn">LIÊN HỆ</a>
+        <a href="Nguyen_Hung_Thien_Loc_CV.pdf" download class="deck-nav-btn btn-cv">TẢI CV (PDF) 📄</a>
+      </nav>
+    </header>
+
+    <!-- 2. HERO SLIDE (16:9 CINEMATIC PRESENTATION) -->
+    <section class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Technology Data Architecture" class="hero-bg-photo">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span>●</span>
+          <span>DATA ENGINEER // PIPELINES, DWH & REAL-TIME AI SYSTEMS</span>
+        </div>
+
+        <h1 class="hero-main-title">
+          NGUYỄN HÙNG<br>
+          <span class="gradient-txt">THIỆN LỘC</span>
+        </h1>
+
+        <div class="hero-quote-box">
+          <p class="hero-quote">
+            "Thiết kế và vận hành các hệ thống Data Warehouse chuẩn hóa, đường ống streaming độ trễ sub-second và ứng dụng AI thông minh phục vụ ra quyết định kinh doanh."
+          </p>
+          <div class="hero-author">// BACHELOR OF SCIENCE IN COMPUTER SCIENCE (MAJOR: DATA SCIENCE) — HCM OPEN UNIVERSITY (2026)</div>
+        </div>
+
+        <div class="hero-cta-row">
+          <a href="#projects-section" class="btn-primary">
+            <span>XEM 3 DỰ ÁN GITHUB NỔI BẬT</span>
+            <span>↓</span>
+          </a>
+          <a href="Nguyen_Hung_Thien_Loc_CV.pdf" download class="btn-secondary">
+            <span>TẢI BẢN CV HOÀN CHỈNH (PDF)</span>
+            <span>📥</span>
+          </a>
+          <a href="https://github.com/alloc110" target="_blank" class="btn-secondary">
+            <span>GITHUB @alloc110</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROFILE & PERSONAL SUMMARY -->
+    <section class="profile-slide" id="profile-section">
+      <div class="profile-photo-col">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Nguyen Hung Thien Loc Profile" class="profile-headshot">
+        <div class="photo-shadow-fade"></div>
+        <div class="photo-badge">
+          <div class="photo-badge-title">NGUYỄN HÙNG THIỆN LỘC</div>
+          <div class="photo-badge-sub">Data Engineer // alloc110</div>
+        </div>
+      </div>
+
+      <div class="profile-info-col">
+        <div class="section-eyebrow">// PROFESSIONAL SUMMARY</div>
+        <h2 class="profile-name">NGUYỄN HÙNG THIỆN LỘC</h2>
+        <div class="profile-role">
+          <span>Data Engineer</span>
+          <span class="dot">•</span>
+          <span>Data Science (HCMOU)</span>
+          <span class="dot">•</span>
+          <span>TOEIC 675</span>
+        </div>
+
+        <p class="profile-bio">
+          Kỹ sư Dữ liệu (Data Engineer) với kinh nghiệm thực chiến qua hai kỳ thực tập tại <strong>Thịnh Thế Vinh Hoa</strong> và <strong>Gradient Technologies</strong> trong việc thiết kế, xây dựng và vận hành hệ thống Data Warehouse và pipeline ETL/ELT. Từng thiết kế hệ thống PostgreSQL DWH hợp nhất dữ liệu SAP B1 và iPOS cho chuỗi bán lẻ 7 thương hiệu, đối soát dữ liệu (~200K dòng/ngày/thương hiệu), thiết lập giám sát/cảnh báo Grafana real-time; phát triển đường ống thu thập dữ liệu tài chính bất đồng bộ và 20+ Python API độ trễ dưới 500 ms. Nền tảng tư duy thuật toán vững chắc (Huy chương Đồng Tin học Quốc gia VOI, Olympic Toán 30-4, ICPC Regional) và phối hợp chặt chẽ với business team để mang lại dữ liệu tin cậy cho BI dashboard.
+        </p>
+
+        <div class="profile-contact-chips">
+          <a href="mailto:nguyenhtloc110@gmail.com" class="p-chip">✉️ nguyenhtloc110@gmail.com</a>
+          <a href="tel:+84363674116" class="p-chip">📞 +84 363 674 116</a>
+          <a href="https://linkedin.com/in/nguyenhtloc110" target="_blank" class="p-chip">💼 linkedin.com/in/nguyenhtloc110</a>
+          <a href="https://github.com/alloc110" target="_blank" class="p-chip">💻 github.com/alloc110</a>
+        </div>
+
+        <div class="profile-stats-row">
+          <div class="p-stat">
+            <h4>30+</h4>
+            <p>ELT PIPELINES</p>
+          </div>
+          <div class="p-stat">
+            <h4>300</h4>
+            <p>TPS REAL-TIME</p>
+          </div>
+          <div class="p-stat">
+            <h4>~200K</h4>
+            <p>DÒNG ĐỐI SOÁT/NGÀY</p>
+          </div>
+          <div class="p-stat">
+            <h4>85%</h4>
+            <p>GIẢM BÁO CÁO THỦ CÔNG</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WORK EXPERIENCE TIMELINE -->
+    <section class="experience-section" id="experience-section">
+      <div class="section-headline">
+        <div class="headline-text">
+          <h3>Kinh Nghiệm Thực Chiến (Work Experience)</h3>
+          <p>Hai kỳ thực tập chuyên sâu xây dựng DWH, đối soát dữ liệu và hạ tầng pipeline</p>
+        </div>
+      </div>
+
+      <div class="exp-cards-grid">
+        <!-- EXP 1: THỊNH THẾ VINH HOA -->
+        <div class="exp-card">
+          <div>
+            <div class="exp-header">
+              <div>
+                <h4 class="exp-company">Thịnh Thế Vinh Hoa</h4>
+                <div class="exp-role">Data Engineer Intern — Ho Chi Minh City</div>
+              </div>
+              <span class="exp-period">09/2026 – Hiện tại</span>
+            </div>
+
+            <ul class="exp-bullets">
+              <li>Thiết kế & xây dựng <strong>PostgreSQL Data Warehouse</strong> (raw → staging → warehouse → datamarts với bảng Fact/Dimension) và hơn <strong>30+ automated ELT pipelines</strong> hợp nhất dữ liệu SAP B1 và iPOS từ 7+ database nguồn cho tập đoàn bán lẻ 7 thương hiệu, thay thế trích xuất thủ công với <strong>95% lịch chạy đúng giờ</strong>.</li>
+              <li>Thực hiện <strong>đối soát dữ liệu (data reconciliation)</strong> giữa DWH và hệ thống nguồn (SAP HANA, POS sales tables ~200K dòng/ngày mỗi thương hiệu), phát hiện 200 điểm lệch và xây dựng workflow tự động sửa lỗi (heal workflows).</li>
+              <li>Triển khai <strong>5+ Grafana dashboards</strong> và <strong>9+ cảnh báo real-time</strong> giám sát tình trạng hạ tầng và pipeline, giảm thời gian phát hiện sự cố xuống <strong>dưới 1 phút</strong>.</li>
+              <li>Làm việc với business team xây dựng 2+ self-service Metabase dashboards với báo cáo hàng ngày tự động, cắt giảm <strong>85% thời gian làm báo cáo thủ công (2 giờ/ngày)</strong>.</li>
+              <li>Biên soạn tài liệu kỹ thuật Markdown và bản so sánh hai kiến trúc DWH (SQL Server staging vs. direct CDC vào PostgreSQL).</li>
+            </ul>
+          </div>
+
+          <div class="exp-tech-tags">
+            <span class="p-tag">PostgreSQL DWH</span>
+            <span class="p-tag">SAP B1 & HANA</span>
+            <span class="p-tag">ELT Pipelines</span>
+            <span class="p-tag">Data Reconciliation</span>
+            <span class="p-tag">Grafana & Prometheus</span>
+            <span class="p-tag">Metabase</span>
+          </div>
+        </div>
+
+        <!-- EXP 2: GRADIENT TECHNOLOGIES -->
+        <div class="exp-card">
+          <div>
+            <div class="exp-header">
+              <div>
+                <h4 class="exp-company">Gradient Technologies</h4>
+                <div class="exp-role">Data Engineer Intern — Ho Chi Minh City</div>
+              </div>
+              <span class="exp-period">03/2026 – 06/2026</span>
+            </div>
+
+            <ul class="exp-bullets">
+              <li>Xây dựng đường ống thu thập dữ liệu bất đồng bộ trên <strong>Windmill</strong> lấy dữ liệu thị trường từ <strong>10 REST API tài chính</strong>, xử lý giới hạn tần suất (rate-limit), cơ chế retry và khử trùng lặp (deduplication), đạt <strong>99% lịch chạy thành công</strong>.</li>
+              <li>Phát triển và triển khai <strong>20+ Python APIs</strong> phục vụ các đội ngũ phân tích hạ nguồn với độ trễ đầu-cuối <strong>dưới 500 ms</strong>.</li>
+              <li>Tái cấu trúc (refactor) codebase nguyên khối với hệ thống typing chặt chẽ và thiết kế mô-đun hóa, giúp <strong>giảm 30% thời gian gỡ lỗi (debugging time)</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="exp-tech-tags">
+            <span class="p-tag">Python (Async/Typing)</span>
+            <span class="p-tag">Windmill</span>
+            <span class="p-tag">10+ Financial REST APIs</span>
+            <span class="p-tag">Modular Architecture</span>
+            <span class="p-tag">API Latency &lt;500ms</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. KEY ACHIEVEMENTS & AWARDS -->
+    <section class="achievements-section" id="achievements-section">
+      <div class="section-headline">
+        <div class="headline-text">
+          <h3>Thành Tựu & Giải Thưởng Nổi Bật</h3>
+          <p>Các giải thưởng học thuật thuật toán và chỉ số hiệu năng kỹ thuật đã được kiểm chứng</p>
+        </div>
+      </div>
+
+      <div class="achievements-grid">
+        <div class="achieve-card">
+          <div class="achieve-icon">⚡</div>
+          <div class="achieve-metric">300 TPS</div>
+          <div class="achieve-title">Real-Time In-Line Blocking</div>
+          <div class="achieve-desc">Nền tảng Fraud Detection xử lý 300 giao dịch đồng thời (>18,000 tx/phút), 100% success rate, độ trễ 836 ms (đáp ứng chuẩn ngân hàng &lt;2s).</div>
+        </div>
+
+        <div class="achieve-card">
+          <div class="achieve-icon">🥉</div>
+          <div class="achieve-metric">TOP 88/235</div>
+          <div class="achieve-title">Học Sinh Giỏi Quốc Gia Tin Học</div>
+          <div class="achieve-desc">Huy chương Đồng Kỳ thi Học sinh Giỏi Quốc gia môn Tin học (VOI 2024), khẳng định năng lực thuật toán và tư duy cấu trúc dữ liệu.</div>
+        </div>
+
+        <div class="achieve-card">
+          <div class="achieve-icon">🥉</div>
+          <div class="achieve-metric">HC ĐỒNG</div>
+          <div class="achieve-title">Olympic Toán Học 30-4</div>
+          <div class="achieve-desc">Huy chương Đồng Olympic Toán học truyền thống 30-4 năm 2021, tạo nền tảng vững vàng cho tư duy mô hình hóa và khoa học dữ liệu.</div>
+        </div>
+
+        <div class="achieve-card">
+          <div class="achieve-icon">🌐</div>
+          <div class="achieve-metric">2X ICPC</div>
+          <div class="achieve-title">ICPC Asia Regional Contest</div>
+          <div class="achieve-desc">Thí sinh đại diện tham dự Cuộc thi Lập trình Sinh viên Quốc tế ICPC Asia Regional liên tiếp hai năm (2024, 2025).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TECHNICAL SKILLS MATRIX -->
+    <section class="skills-section">
+      <div class="section-headline">
+        <div class="headline-text">
+          <h3>Bộ Kỹ Năng Kỹ Thuật (Technical Skills Matrix)</h3>
+          <p>Ngôn ngữ, công cụ pipeline, cơ sở dữ liệu, giám sát và hạ tầng DevOps</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-box">
+          <div class="skill-box-title">💻 Ngôn Ngữ & Pipeline</div>
+          <div class="skill-tags-cloud">
+            <span class="s-tag highlight">Python (3.11+)</span>
+            <span class="s-tag highlight">SQL (Advanced)</span>
+            <span class="s-tag highlight">Go (Golang 1.21)</span>
+            <span class="s-tag">C++</span>
+            <span class="s-tag highlight">ETL / ELT Pipelines</span>
+            <span class="s-tag">REST API Ingestion</span>
+            <span class="s-tag">Windmill</span>
+            <span class="s-tag">n8n</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-box-title">🐘 Kho Dữ Liệu & Mô Hình Hóa</div>
+          <div class="skill-tags-cloud">
+            <span class="s-tag highlight">PostgreSQL DWH</span>
+            <span class="s-tag highlight">dbt (Data Build Tool)</span>
+            <span class="s-tag">Microsoft SQL Server (MSSQL)</span>
+            <span class="s-tag highlight">Medallion Architecture</span>
+            <span class="s-tag">Fact & Dimension Tables</span>
+            <span class="s-tag">Data Marts</span>
+            <span class="s-tag">SAP B1 & HANA Integration</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-box-title">🚀 Streaming, AI & Hạ Tầng</div>
+          <div class="skill-tags-cloud">
+            <span class="s-tag highlight">Apache Kafka</span>
+            <span class="s-tag highlight">Apache Airflow</span>
+            <span class="s-tag">Apache Flink / PyFlink</span>
+            <span class="s-tag highlight">Redis Cache</span>
+            <span class="s-tag">gRPC & Protobuf</span>
+            <span class="s-tag highlight">Kubernetes (HPA)</span>
+            <span class="s-tag">Docker</span>
+            <span class="s-tag highlight">Grafana & Prometheus</span>
+            <span class="s-tag">Metabase</span>
+            <span class="s-tag">Power BI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FEATURED GITHUB REPOSITORIES (3 REPOS CỐT LÕI) -->
+    <section class="projects-section" id="projects-section">
+      <div class="section-headline">
+        <div class="headline-text">
+          <h3>3 Dự Án GitHub Tiêu Biểu (Flagship Repositories)</h3>
+          <p>Hệ thống Fraud Detection thời gian thực, ClawSense AI Price Intelligence và FindMyBoss CV Studio</p>
+        </div>
+      </div>
+
+      <div class="projects-filter-bar">
+        <button class="filter-chip active" onclick="filterProjects('all')">Tất Cả 3 Dự Án</button>
+        <button class="filter-chip" onclick="filterProjects('streaming')">Streaming & Real-Time</button>
+        <button class="filter-chip" onclick="filterProjects('ai')">AI Agents & LLM</button>
+        <button class="filter-chip" onclick="filterProjects('dwh')">Data Warehouse & ELT</button>
+      </div>
+
+      <div class="flagship-grid">
+        
+        <!-- REPO 1: REAL-TIME FRAUD DETECTION PLATFORM -->
+        <article class="flagship-card" data-category="streaming dwh">
+          <div class="flagship-visual">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" alt="Fraud Detection Platform" class="flagship-bg-img">
+            <div class="flagship-visual-overlay"></div>
+            
+            <div class="flagship-badge-row">
+              <span class="flagship-badge badge-fraud">REAL-TIME FRAUD STREAMING</span>
+              <span class="flagship-badge badge-fraud">BENCHMARK VERIFIED</span>
+            </div>
+
+            <div class="flagship-stat-callout">
+              <div class="callout-num">300 TPS // 836 ms</div>
+              <div class="callout-label">100% Success Rate • Đáp ứng chuẩn Banking &lt;2s</div>
+            </div>
+          </div>
+
+          <div class="flagship-details">
+            <div>
+              <h4 class="flagship-title">Real-Time Fraud Detection Platform (J-DataPipe)</h4>
+              <div class="flagship-sub">Go Gateway • Kafka • Redis • XGBoost (gRPC) • PostgreSQL • Kubernetes</div>
+              <p class="flagship-desc">
+                Hệ thống đánh giá và ngăn chặn gian lận giao dịch tài chính thời gian thực theo cơ chế <strong>In-line Pre-authorization Blocking</strong>. Giải quyết triệt để nút thắt cổ chai GIL bằng việc chuyển đổi cổng thanh toán sang Golang, kết nối đệm bộ nhớ Redis kiểm tra số dư sub-millisecond, và thực hiện suy luận mô hình XGBoost qua gRPC/Protobuf.
+              </p>
+              
+              <div class="flagship-highlights">
+                <div><span class="bullet">▹</span><span><strong>Kiến trúc phân tầng:</strong> Đồng bộ giao dịch trực tiếp (In-line Blocking) và ghi nhận bất đồng bộ Write-Behind qua Apache Kafka vào PostgreSQL.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Độ co giãn cao:</strong> Triển khai trên cụm Kubernetes với Horizontal Pod Autoscaler (HPA) tự động scale 3-10 Pods theo tải giao dịch.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Giám sát chuẩn ngân hàng:</strong> Tích hợp đo lường thời gian thực với Prometheus và Grafana Telemetry.</span></div>
+              </div>
+
+              <div class="flagship-tech-row">
+                <span class="p-tag">Golang 1.21</span>
+                <span class="p-tag">Apache Kafka</span>
+                <span class="p-tag">Apache Flink</span>
+                <span class="p-tag">XGBoost</span>
+                <span class="p-tag">gRPC / Protobuf</span>
+                <span class="p-tag">Redis Cache</span>
+                <span class="p-tag">PostgreSQL 15</span>
+                <span class="p-tag">Kubernetes HPA</span>
+                <span class="p-tag">Grafana</span>
+              </div>
+            </div>
+
+            <div class="flagship-actions">
+              <a href="https://github.com/alloc110/Fraud-Detection-System" target="_blank" class="link-btn primary-btn">
+                <span>XEM REPO TRÊN GITHUB</span>
+                <span>↗</span>
+              </a>
+              <a href="https://github.com/alloc110/Fraud-Detection-System#architectural-topologies" target="_blank" class="link-btn">
+                <span>SƠ ĐỒ KIẾN TRÚC & BENCHMARK</span>
+                <span>📊</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- REPO 2: CLAWSENSE AI PRICE INTELLIGENCE -->
+        <article class="flagship-card" data-category="dwh ai">
+          <div class="flagship-visual">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="ClawSense AI Price Intelligence" class="flagship-bg-img">
+            <div class="flagship-visual-overlay"></div>
+            
+            <div class="flagship-badge-row">
+              <span class="flagship-badge badge-claw">MODERN DATA STACK</span>
+              <span class="flagship-badge badge-claw">TEXT-TO-SQL AI AGENT</span>
+            </div>
+
+            <div class="flagship-stat-callout">
+              <div class="callout-num">dbt Medallion + Gemini AI</div>
+              <div class="callout-label">Bronze → Silver → Gold • Jenkins CI/CD Automation</div>
+            </div>
+          </div>
+
+          <div class="flagship-details">
+            <div>
+              <h4 class="flagship-title">ClawSense: FinHouse Price Intelligence & Text-to-SQL</h4>
+              <div class="flagship-sub">Python 3.11 • FastAPI • LangChain • Gemini AI • dbt Core • Jenkins • PostgreSQL</div>
+              <p class="flagship-desc">
+                Hệ thống phân tích biến động giá và thông tin thị trường bất động sản thông minh. Tự động hóa toàn bộ quy trình biến đổi dữ liệu nhiều tầng theo kiến trúc <strong>Medallion (Bronze Raw → Silver Normalized → Gold Data Marts)</strong> bằng dbt-core thông qua Jenkins Pipeline CI/CD. Tích hợp AI Agent chuyển đổi ngôn ngữ tự nhiên thành câu lệnh SQL để truy vấn tức thì.
+              </p>
+              
+              <div class="flagship-highlights">
+                <div><span class="bullet">▹</span><span><strong>AI Agent Text-to-SQL:</strong> Người dùng đặt câu hỏi bằng ngôn ngữ tự nhiên qua FastAPI, Gemini và LangChain biên dịch sang SQL chuẩn xác và trả về nhận định thị trường.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Quản lý chất lượng dữ liệu:</strong> dbt test kiểm định ràng buộc tính đúng đắn trước khi nạp vào các bảng Gold mart_best_deals và mart_price_history.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Giám sát CI/CD:</strong> Prometheus & Grafana theo dõi tỷ lệ thành công của các build Jenkins và hiệu năng truy vấn database.</span></div>
+              </div>
+
+              <div class="flagship-tech-row">
+                <span class="p-tag">Python 3.11</span>
+                <span class="p-tag">FastAPI</span>
+                <span class="p-tag">Google Gemini AI</span>
+                <span class="p-tag">LangChain</span>
+                <span class="p-tag">dbt Core 1.7</span>
+                <span class="p-tag">PostgreSQL 15</span>
+                <span class="p-tag">Jenkins CI/CD</span>
+                <span class="p-tag">Prometheus & Grafana</span>
+              </div>
+            </div>
+
+            <div class="flagship-actions">
+              <a href="https://github.com/alloc110/ClawSense" target="_blank" class="link-btn primary-btn">
+                <span>XEM REPO TRÊN GITHUB</span>
+                <span>↗</span>
+              </a>
+              <a href="https://github.com/alloc110/ClawSense#data-flow-pipeline" target="_blank" class="link-btn">
+                <span>QUY TRÌNH DATA FLOW PIPELINE</span>
+                <span>🌊</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- REPO 3: FINDMYBOSS -->
+        <article class="flagship-card" data-category="ai">
+          <div class="flagship-visual">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="FindMyBoss System" class="flagship-bg-img">
+            <div class="flagship-visual-overlay"></div>
+            
+            <div class="flagship-badge-row">
+              <span class="flagship-badge badge-find">MULTI-PORTAL HARVESTER</span>
+              <span class="flagship-badge badge-find">LATEX CV STUDIO</span>
+            </div>
+
+            <div class="flagship-stat-callout">
+              <div class="callout-num">6 Tech Portals // 2.7s Compile</div>
+              <div class="callout-label">Playwright Chromium • Rust Tectonic Engine • 24/24 Tests</div>
+            </div>
+          </div>
+
+          <div class="flagship-details">
+            <div>
+              <h4 class="flagship-title">FindMyBoss: IT Job Harvester & LaTeX CV Studio</h4>
+              <div class="flagship-sub">FastAPI • Multi-Provider AI • Tectonic XeTeX (Rust) • Playwright • 3 Docker Microservices</div>
+              <p class="flagship-desc">
+                Hệ sinh thái thu hoạch việc làm CNTT tự động từ 6 cổng thông tin lớn tại Việt Nam (ITviec, TopDev, TopCV, VietnamWorks, JobsGO, Indeed VN). Đánh giá mức độ phù hợp ATS, nạp Master CV PDF làm "Source of Truth" để ngăn chặn AI bịa đặt kinh nghiệm, và tích hợp trình soạn thảo Overleaf-style biên dịch CV sang file PDF chuẩn quốc tế chỉ trong 2.7 giây.
+              </p>
+              
+              <div class="flagship-highlights">
+                <div><span class="bullet">▹</span><span><strong>Hỗ trợ đa nhà cung cấp AI:</strong> Tích hợp kiểm tra độ trễ trực tiếp cho Google Gemini (2.5/3.0), OpenAI GPT-4o, Claude 3.5 Sonnet và DeepSeek.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Biên dịch LaTeX độc lập:</strong> Engine Tectonic XeTeX viết bằng Rust siêu nhẹ (~30MB), thay thế bộ cài đặt TeXLive 5GB cồng kềnh.</span></div>
+                <div><span class="bullet">▹</span><span><strong>Kiến trúc Microservices:</strong> 3 container Docker phân lập (Web Studio, LaTeX Renderer, Scraper Worker) cùng bộ kiểm thử 24/24 Unit Tests.</span></div>
+              </div>
+
+              <div class="flagship-tech-row">
+                <span class="p-tag">Python 3.12</span>
+                <span class="p-tag">FastAPI</span>
+                <span class="p-tag">Multi-Provider AI</span>
+                <span class="p-tag">Tectonic (Rust)</span>
+                <span class="p-tag">Playwright Chromium</span>
+                <span class="p-tag">SQLite WAL</span>
+                <span class="p-tag">Docker Compose</span>
+                <span class="p-tag">24/24 Unit Tests</span>
+              </div>
+            </div>
+
+            <div class="flagship-actions">
+              <a href="https://github.com/alloc110/FindMyBoss" target="_blank" class="link-btn primary-btn">
+                <span>XEM REPO TRÊN GITHUB</span>
+                <span>↗</span>
+              </a>
+              <a href="https://github.com/alloc110/FindMyBoss#system-architecture--docker-microservices" target="_blank" class="link-btn">
+                <span>KIẾN TRÚC 3 MICROSERVICES</span>
+                <span>🏗️</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 8. PHILOSOPHY QUOTE BANNER -->
+    <section class="quote-banner">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop" alt="Data Universe Network" class="quote-bg-photo">
+      <div class="quote-overlay"></div>
+      
+      <div class="quote-content">
+        <div class="quote-icon">“</div>
+        <blockquote class="quote-text">
+          Dữ liệu là nguồn huyết mạch của kỷ nguyên số, nhưng giá trị thật sự chỉ được giải phóng khi ta kiến trúc những đường ống dữ liệu vững vàng và chuyển hóa chúng thành hành động tin cậy.
+        </blockquote>
+        <div class="quote-caption">// DATA ENGINEERING & ARCHITECTURAL DISCIPLINE — NGUYỄN HÙNG THIỆN LỘC</div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT & THANK YOU SECTION -->
+    <section class="contact-slide" id="contact-section">
+      <div class="contact-left">
+        <h2>THANK YOU // HÃY KẾT NỐI</h2>
+        <p>
+          Bạn đang tìm kiếm một Data Engineer có nền tảng thuật toán vững chắc, kinh nghiệm thực chiến về Data Warehouse (PostgreSQL, dbt), hạ tầng Streaming thời gian thực (Go, Kafka, Redis) hoặc giải pháp AI thông minh? Rất mong có cơ hội được trao đổi cùng bạn.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="mailto:nguyenhtloc110@gmail.com" class="btn-primary">
+            <span>GỬI EMAIL TRỰC TIẾP</span>
+            <span>✉️</span>
+          </a>
+          <a href="Nguyen_Hung_Thien_Loc_CV.pdf" download class="btn-secondary">
+            <span>TẢI RESUME (PDF)</span>
+            <span>📄</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <a href="mailto:nguyenhtloc110@gmail.com" class="contact-tile">
+          <div class="tile-icon">✉️</div>
+          <div class="tile-info">
+            <div>EMAIL LIÊN HỆ</div>
+            <div>nguyenhtloc110@gmail.com</div>
+          </div>
+        </a>
+
+        <a href="tel:+84363674116" class="contact-tile">
+          <div class="tile-icon">📞</div>
+          <div class="tile-info">
+            <div>ĐIỆN THOẠI // ZALO</div>
+            <div>+84 363 674 116</div>
+          </div>
+        </a>
+
+        <a href="https://linkedin.com/in/nguyenhtloc110" target="_blank" class="contact-tile">
+          <div class="tile-icon">💼</div>
+          <div class="tile-info">
+            <div>LINKEDIN PROFILE</div>
+            <div>linkedin.com/in/nguyenhtloc110</div>
+          </div>
+        </a>
+
+        <a href="https://github.com/alloc110" target="_blank" class="contact-tile">
+          <div class="tile-icon">💻</div>
+          <div class="tile-info">
+            <div>GITHUB PROFILE</div>
+            <div>github.com/alloc110</div>
+          </div>
+        </a>
+
+        <div class="contact-tile">
+          <div class="tile-icon">📍</div>
+          <div class="tile-info">
+            <div>ĐỊA ĐIỂM HOẠT ĐỘNG</div>
+            <div>Ho Chi Minh City, Vietnam // Hybrid & Remote</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="portfolio-footer">
+      <p>© 2026 Nguyễn Hùng Thiện Lộc (alloc110). Designed with 16:9 Cinematic Editorial System.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Project filtering by category
+    function filterProjects(cat) {
+      // Update filter chips styling
+      const chips = document.querySelectorAll('.filter-chip');
+      chips.forEach(chip => {
+        chip.classList.remove('active');
+        if (chip.textContent.toLowerCase().includes(cat) || (cat === 'all' && chip.textContent.includes('Tất Cả'))) {
+          chip.classList.add('active');
+        }
+      });
+
+      // Filter project cards
+      const cards = document.querySelectorAll('.flagship-card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (cat === 'all' || itemCat.includes(cat)) {
+          card.style.display = 'grid';
+          card.style.opacity = '1';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
